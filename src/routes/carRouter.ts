@@ -11,5 +11,7 @@ const controller = new CarController(service);
 cRouter.post('/', (req, res) => controller.create(req, res));
 cRouter.get('/', (req, res) => controller.read(req, res));
 cRouter.get('/:id', (req, res) => controller.readOne(req, res));
+cRouter.put('/:id', (req, res) => controller.update(req, res));
+cRouter.delete('/:id', (req, res) => controller.delete(req, res));
 
 export default cRouter;

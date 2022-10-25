@@ -26,10 +26,6 @@ export default class CarService implements IService<ICar> {
   }
 
   public async readOne(id: string): Promise<ICar | null> {
-    if (id.length < 24) {
-      throw new Error(ErrorTypes.InvalidMongoId);
-    }
-
     const result = await this._car.readOne(id);
     
     if (!result) {
@@ -38,18 +34,24 @@ export default class CarService implements IService<ICar> {
     return result;
   }
 
-  public update(id: string, obj: ICar): Promise<ICar | null> {
-    const result = this._car.update(id, obj);
+  public async update(id: string, obj: ICar): Promise<ICar | null> {
+    const parsed = carZodSchema.safeParse(obj);
+
+    if (!parsed.success) {
+      throw parsed.error;
+    }
+    
+    const result = await this._car.update(id, parsed.data);
     if (!result) {
-      return result;
+      throw new Error(ErrorTypes.EntityNotFound);
     }
     return result;
   }
 
-  public delete(id: string): Promise<ICar | null> {
-    const result = this._car.delete(id);
+  public async delete(id: string): Promise<ICar | null> {
+    const result = await this._car.delete(id);
     if (!result) {
-      return result;
+      throw new Error(ErrorTypes.EntityNotFound);
     }
     return result;
   }
