@@ -1,9 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
-// import FrameModel from '../../../models/Frame';
 import Car from '../../../models/carModel';
 import { model, Model } from 'mongoose';
-// import { frameMock, frameMockWithId } from '../../mocks/frameMock';
 import {
    carMock,
    carMockWithId,
