@@ -10,8 +10,6 @@ import {
     motocycleMockUpdatedWithId
   } from '../../mocks/motocycleMocks';
 
-
-
 describe('Motocycle Model', () => {
 	const motocycleModel = new Motocycle();
 
@@ -76,7 +74,7 @@ describe('Motocycle Model', () => {
 
   describe('deleting a motocycle', () => {
     it('sucessfully deleted', async () => {
-      const motocycleDeleted = await motocycleModel.delete('63592945f44546bf5a691c8d');
+      const motocycleDeleted = await motocycleModel.delete('4edd40c86762e0fb12000003');
       expect(motocycleDeleted).to.be.deep.equal(motocycleMockWithId);
     });
 

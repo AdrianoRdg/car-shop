@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { ZodError } from 'zod';
 import { ErrorTypes } from '../../../errors/catalog';
+import { ICar } from '../../../interfaces/ICar';
 import Car from '../../../models/carModel';
 import CarService from '../../../services/carService';
 import { 
@@ -12,7 +13,7 @@ import {
 	carMockUpdatedWithId,
 } from '../../mocks/carMocks';
 
-describe('Frame Service', () => {
+describe('Car Service', () => {
 	const carModel = new Car();
 	const carService = new CarService(carModel);
 
@@ -27,14 +28,20 @@ describe('Frame Service', () => {
 			.onCall(0).resolves(carMockList) 
 			.onCall(1).resolves([]);
 		
-		sinon.stub(carModel, 'update').resolves(carMockUpdatedWithId);
+		sinon.stub(carModel, 'update')
+			.onCall(0).resolves(carMockUpdatedWithId)
+			.onCall(1).resolves(null);
+
+		sinon.stub(carModel, 'delete')
+			.onCall(0).resolves(carMockUpdatedWithId)
+			.onCall(1).resolves(null);
 	});
 	
 	after(() => {
 		sinon.restore()
 	});
 
-	describe('Create Frame', () => {
+	describe('Create car', () => {
 		it('Success', async () => {
 			const carCreated = await carService.create(carMock);
 
@@ -53,7 +60,7 @@ describe('Frame Service', () => {
 		});
 	});
 
-	describe('Read Car', () => {
+	describe('Read car', () => {
 		it('Success', async () => {
 			const carsFound = await carService.read();
 
@@ -67,7 +74,7 @@ describe('Frame Service', () => {
 		});
 	});
 
-	describe('ReadOne Car', () => {
+	describe('ReadOne car', () => {
 		it('Success', async () => {
 			const carFound = await carService.readOne(carMockWithId._id);
 
@@ -87,7 +94,7 @@ describe('Frame Service', () => {
 		});
 	});
 
-	describe('Update Car', () => {
+	describe('Update car', () => {
 		it('Success', async () => {
 			const carUpdated = await carService.update(
 				carMockWithId._id, 
@@ -96,5 +103,54 @@ describe('Frame Service', () => {
 
 			expect(carUpdated).to.be.deep.equal(carMockUpdatedWithId);
 		});
+
+		it('Zod Failure', async () => {
+			let error;
+			try {
+				await carService.update(
+          carMockWithId._id, 
+          {} as ICar,
+        );
+			} catch (err) {
+				error = err
+			}
+
+			expect(error).to.be.instanceOf(ZodError);
+		});
+
+    it('Failure', async () => {
+      let error;
+			try {
+				await carService.update(
+          carMockWithId._id,
+          carMockToUpdate
+        );
+			} catch (err:any) {
+				error = err
+			}
+
+			expect(error, 'error should be defined').not.to.be.undefined;
+			expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
+		});
 	});
+
+	describe('Delete car', () => {
+    it('Success', async () => {
+			const carDeleted = await carService.delete(carMockWithId._id);
+
+			expect(carDeleted).to.be.deep.equal(carMockUpdatedWithId);
+		});
+
+		it('Failure', async () => {
+      let error;
+      try {
+        await carService.delete(carMockWithId._id);
+      } catch (err:any) {
+        error = err
+      }
+  
+      expect(error, 'error should be defined').not.to.be.undefined;
+      expect(error.message).to.be.deep.equal(ErrorTypes.EntityNotFound);
+    });
+  });
 });
