@@ -11,48 +11,40 @@ export default class CarService implements IService<ICar> {
     this._car = model;
   }
 
-  public async create(obj: unknown): Promise<ICar> {
+  async create(obj: unknown): Promise<ICar> {
     const parsed = carZodSchema.safeParse(obj);
 
-    if (!parsed.success) {
-      throw parsed.error;
-    }
+    if (!parsed.success) throw parsed.error;
     return this._car.create(parsed.data);
   }
 
-  public read(): Promise<ICar[]> {
+  async read(): Promise<ICar[]> {
     const result = this._car.read();
     return result;
   }
 
-  public async readOne(id: string): Promise<ICar | null> {
+  async readOne(id: string): Promise<ICar | null> {
     const result = await this._car.readOne(id);
     
-    if (!result) {
-      throw new Error(ErrorTypes.EntityNotFound);
-    }
+    if (!result) throw new Error(ErrorTypes.EntityNotFound);
     return result;
   }
 
-  public async update(id: string, obj: ICar): Promise<ICar | null> {
+  async update(id: string, obj: ICar): Promise<ICar | null> {
     const parsed = carZodSchema.safeParse(obj);
 
-    if (!parsed.success) {
-      throw parsed.error;
-    }
+    if (!parsed.success) throw parsed.error;
     
     const result = await this._car.update(id, parsed.data);
-    if (!result) {
-      throw new Error(ErrorTypes.EntityNotFound);
-    }
+    if (!result) throw new Error(ErrorTypes.EntityNotFound);
+ 
     return result;
   }
 
-  public async delete(id: string): Promise<ICar | null> {
+  async delete(id: string): Promise<ICar | null> {
     const result = await this._car.delete(id);
-    if (!result) {
-      throw new Error(ErrorTypes.EntityNotFound);
-    }
+    if (!result) throw new Error(ErrorTypes.EntityNotFound);
+    
     return result;
   }
 }

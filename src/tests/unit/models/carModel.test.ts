@@ -64,6 +64,14 @@ describe('Car Model', () => {
       );
       expect(carUpdated).to.be.deep.equal(carMockUpdatedWithId);
     });
+
+    it('_id not found', async () => {
+			try {
+				await carModel.update('wrongId', carMockToUpdate);
+			} catch (error: any) {
+				expect(error.message).to.be.eq('InvalidMongoId');
+			}
+		});
   });
 
   describe('deleting a car', () => {
@@ -71,5 +79,13 @@ describe('Car Model', () => {
       const carDeleted = await carModel.delete('63592945f44546bf5a691c8d');
       expect(carDeleted).to.be.deep.equal(carMockWithId);
     });
+
+    it('_id not found', async () => {
+			try {
+				await carModel.delete('wrongId');
+			} catch (error: any) {
+				expect(error.message).to.be.eq('InvalidMongoId');
+			}
+		});
   });
 });
