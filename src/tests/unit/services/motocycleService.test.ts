@@ -2,9 +2,7 @@ import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { ZodError } from 'zod';
 import { ErrorTypes } from '../../../errors/catalog';
-// import Car from '../../../models/carModel';
 import Motocycle from '../../../models/motocycleModel';
-// import CarService from '../../../services/carService';
 import MotocycleService from '../../../services/motocycleService';
 import {
   motocycleMock,
