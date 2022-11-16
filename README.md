@@ -83,7 +83,12 @@ Após a configuração de variáveis de ambiente, temos os seguintes comandos
 
 ## Rotas da API
 
-Rotas de carros
+Após iniciar o servidor, a API deve rodar em uma url parecida com a seguinte: 
+
+    http://localhost:3001
+
+
+### Rotas de carros
 
 ### [POST] /cars
 
@@ -156,7 +161,7 @@ Rota para atualizar um carro pelo seu ID, recebendo o seguinte body e retornando
 
 Rota para deletar um carro pelo seu ID, após deletar o carro a rota não retorna nada, apenas o status 204.
 
-Rotas de motos
+### Rotas de motos
 
 ### [POST] /motocycle
 
