@@ -17,10 +17,8 @@ Projeto de CRUD de uma API de uma concessionaria, utilizando TypeScript com prog
 
 Clone o projeto
 
-```
-git clone git@github.com:AdrianoRdg/car-shop.git
+    git@github.com:AdrianoRdg/car-shop.git
 
-```
 
 Após realizar o clone, existem duas maneiras de rodar o projeto, via docker e localmente na maquina.
 
