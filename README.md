@@ -53,27 +53,6 @@ Após realizar o clone, existem duas maneiras de rodar o projeto, via docker e l
 </details>
 
 
-## Utilização de variáveis de ambiente
-
-Na raiz do projeto existe um arquivo chamado .env.exemple, renomeie-o para .env e configure as variáveis de ambiente
-
-```
-#### SERVER VARS
-NODE_ENV=development
-API_PORT=3000
-
-#### DATABASE VARS
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-MYSQL_DB_NAME=blogs-api
-MYSQL_USER=root
-MYSQL_PASSWORD=password
-
-#### SECRECT VARS
-JWT_SECRET=trybe
-
-```
-
 ## Comandos importantes
 
 Após a configuração de variáveis de ambiente, temos os seguintes comandos
