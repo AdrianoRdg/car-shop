@@ -1,6 +1,6 @@
 # Car Shoping Project
 
-Projeto de CRUD de uma API de uma concessionaria, utilizando TypeScript com programação orientada aobjetos e banco de dados não relacional MongoDB, junto da ODM moongose e testes feitos com chai, sinon e mocha.
+CRUD de uma API de uma concessionaria em que é possivel gerenciar carros e motos, utilizando a arquitetura MSC, TypeScript, programação orientada a objetos e banco de dados não relacional MongoDB, junto da ODM moongose e testes feitos com chai, sinon e mocha.
 
 ## Tecnologias utilizadas
 
